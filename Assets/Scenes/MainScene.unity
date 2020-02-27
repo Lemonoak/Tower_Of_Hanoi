@@ -247,6 +247,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1306037499}
+  - component: {fileID: 1306037500}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -268,6 +269,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1306037500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306037498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87ab80eafe15321489e91df2927ae996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ringToHold: {fileID: 0}
 --- !u!1 &1324094191
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,6 +673,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ring_1
       objectReference: {fileID: 0}
+    - target: {fileID: 1482668186245927366, guid: b2f1a491ea551c242b25c1f6d6d70638,
+        type: 3}
+      propertyPath: m_TagString
+      value: Ring
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2f1a491ea551c242b25c1f6d6d70638, type: 3}
 --- !u!1001 &1508577665309647231
@@ -728,6 +747,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ring_2
       objectReference: {fileID: 0}
+    - target: {fileID: 1508577665693565119, guid: dca85fde45359c74dbed23b050f3c414,
+        type: 3}
+      propertyPath: m_TagString
+      value: Ring
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dca85fde45359c74dbed23b050f3c414, type: 3}
 --- !u!1001 &8067291575645186190
@@ -741,6 +765,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ring_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067291577085119230, guid: 5b7462ec833e748459e47feaab4bf58f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Ring
       objectReference: {fileID: 0}
     - target: {fileID: 8067291577085119231, guid: 5b7462ec833e748459e47feaab4bf58f,
         type: 3}
@@ -865,6 +894,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ring_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8536143664172175129, guid: 6c55e6e062457d04d808fe000ef0e586,
+        type: 3}
+      propertyPath: m_TagString
+      value: Ring
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c55e6e062457d04d808fe000ef0e586, type: 3}
