@@ -27,26 +27,30 @@ public class Pin : MonoBehaviour
         }
     }
 
-    public void PositionRing()
+    public void PositionRing(Ring ringToPosition)
     {
         //Put the ring in the correct place on the pin
-        int stepsUp = -1;
+        int stepsUp = 0;
         for (int i = 0; i < ringsOnPin.Count; i++)
         {
             stepsUp++;
         }
 
-        ringsOnPin[ringsOnPin.Count - 1].transform.position = new Vector3(gameObject.transform.position.x, -3.6f + (1.2f * stepsUp));
+        ringToPosition.transform.position = new Vector3(gameObject.transform.position.x, -3.6f + (1.2f * stepsUp));
     }
 
     public void AddRing(Ring ringToAdd)
     {
-        ringsOnPin.Add(ringToAdd);
-        PositionRing();
+        if(!ringsOnPin.Contains(ringToAdd))
+        {
+            PositionRing(ringToAdd);
+            ringsOnPin.Add(ringToAdd);
+        }
     }
 
     public void RemoveRing(Ring ringToRemove)
     {
-        ringsOnPin.Remove(ringToRemove);
+        if (ringsOnPin.Contains(ringToAdd))
+            ringsOnPin.Remove(ringToRemove);
     }
 }
