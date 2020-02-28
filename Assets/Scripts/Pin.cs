@@ -50,7 +50,7 @@ public class Pin : MonoBehaviour
 
     public void RemoveRing(Ring ringToRemove)
     {
-        if (ringsOnPin.Contains(ringToAdd))
+        if (ringsOnPin.Contains(ringToRemove))
             ringsOnPin.Remove(ringToRemove);
     }
 }

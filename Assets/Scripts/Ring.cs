@@ -21,6 +21,12 @@ public class Ring : MonoBehaviour
             return false;
     }
 
+    public void GetPickedUp()
+    {
+        pinToEnter.RemoveRing(this);
+        pinToEnter = null;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Pin"))
@@ -28,14 +34,11 @@ public class Ring : MonoBehaviour
             pinToEnter = collision.GetComponent<Pin>();
         }
     }
-
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Pin") && isBeingHeld)
+        if (collision.CompareTag("Pin") && pinToEnter == null)
         {
-            pinToEnter.RemoveRing(this);
-            pinToEnter = null;
+            pinToEnter = collision.GetComponent<Pin>();
         }
     }
-
 }

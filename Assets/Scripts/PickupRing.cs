@@ -34,6 +34,7 @@ public class PickupRing : MonoBehaviour
             {
                 ringToHold = hit.transform.GetComponent<Ring>();
                 ringToHold.SetIsBeingHeld(true);
+                ringToHold.GetPickedUp();
             }
         }
         //hold ring
@@ -47,6 +48,8 @@ public class PickupRing : MonoBehaviour
         {
             if(ringToHold.TryRelease())
                 ringToHold = null;
+            //else
+                //TODO: SHAKE RING
         }
     }
 
