@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class PickupRing : MonoBehaviour
 {
+    public static PickupRing instance;
+
     public Ring ringToHold;
     LayerMask ringMask;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -20,7 +27,7 @@ public class PickupRing : MonoBehaviour
     void HoldRing()
     {
         //find ring
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && ringToHold == null)
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 1, ringMask);
             if(hit.collider != null)
@@ -32,14 +39,27 @@ public class PickupRing : MonoBehaviour
         //hold ring
         if(Input.GetMouseButton(0) && ringToHold != null)
         {
+            //TODO: Smooth the position from ring to mouse!
             ringToHold.transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, ringToHold.transform.position.z);
         }
         //release ring
         if(Input.GetMouseButtonUp(0) && ringToHold != null)
         {
-            ringToHold.SetIsBeingHeld(false);
-            ringToHold = null;
+            if(ringToHold.TryRelease())
+                ringToHold = null;
         }
     }
 
+    public static PickupRing GetInstance()
+    {
+        if (instance == null)
+            instance = new GameObject("PickupRing").AddComponent<PickupRing>();
+
+        return instance;
+    }
+
+    private void OnDestroy()
+    {
+        instance = null;
+    }
 }

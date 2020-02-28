@@ -4,21 +4,49 @@ using UnityEngine;
 
 public class Pin : MonoBehaviour
 {
-    void CheckRingSize()
-    {
-        //Compare Ring size here
-    }
+    public List<Ring> ringsOnPin;
+    Ring ringToAdd;
 
-    void SlideRingDown()
+    public bool CheckRingSize(Ring newRing)
     {
-
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Ring"))
+        //compare ring size
+        if (ringsOnPin.Count > 0)
         {
-            Debug.Log("Ring Entered Collision");
+            if (newRing.ringSize > ringsOnPin[ringsOnPin.Count - 1].ringSize)
+                return false;
+            else
+            {
+                AddRing(newRing);
+                return true;
+            }
         }
+        else
+        {
+            AddRing(newRing);
+            return true;
+        }
+    }
+
+    public void PositionRing()
+    {
+        //Put the ring in the correct place on the pin
+        int stepsUp = -1;
+        for (int i = 0; i < ringsOnPin.Count; i++)
+        {
+            stepsUp++;
+        }
+
+        ringsOnPin[ringsOnPin.Count - 1].transform.position = new Vector3(gameObject.transform.position.x, -3.6f + (1.2f * stepsUp));
+    }
+
+    public void AddRing(Ring ringToAdd)
+    {
+        ringsOnPin.Add(ringToAdd);
+        PositionRing();
+    }
+
+    public void RemoveRing(Ring ringToRemove)
+    {
+        ringsOnPin.Remove(ringToRemove);
     }
 }
