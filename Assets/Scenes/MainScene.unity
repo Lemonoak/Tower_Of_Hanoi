@@ -478,6 +478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ab80eafe15321489e91df2927ae996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ringMoveSpeed: 10
   ringToHold: {fileID: 0}
 --- !u!1 &1324094191
 GameObject:
@@ -1086,6 +1087,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3279790736342608257, guid: 5b7462ec833e748459e47feaab4bf58f,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6fcb7c5331da21840825a090f6364e50, type: 2}
     - target: {fileID: 8067291575820668641, guid: 5b7462ec833e748459e47feaab4bf58f,
         type: 3}
       propertyPath: m_Layer

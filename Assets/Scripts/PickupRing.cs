@@ -38,9 +38,7 @@ public class PickupRing : MonoBehaviour
             {
                 ringToHold = hit.collider.GetComponent<Ring>();
                 if (!ringToHold.TryPickup())
-                {
                     ringToHold = null;
-                }
             }
         }
         //hold ring
