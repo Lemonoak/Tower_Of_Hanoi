@@ -20,6 +20,7 @@ public class PickupRing : MonoBehaviour
 
     private void Start()
     {
+        //make raycast only find rings
         ringMask = LayerMask.GetMask("Rings");
     }
 
@@ -55,6 +56,7 @@ public class PickupRing : MonoBehaviour
         }
     }
 
+    //only one pickup instance should ever be in the scene (but always one)
     public static PickupRing GetInstance()
     {
         if (instance == null)

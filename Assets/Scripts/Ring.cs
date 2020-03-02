@@ -6,19 +6,19 @@ public class Ring : MonoBehaviour
 {
     [Header("Properties")]
     public int ringSize = 0;
+    public SpriteRenderer backSprite;
+    public SpriteRenderer frontSprite;
 
     [Header("Debugging")]
     Pin pinToEnter;
     Animator anim;
-
-    public SpriteRenderer backSprite;
-    public SpriteRenderer frontSprite;
 
     private void Start()
     {
         anim = GetComponent<Animator>();
     }
 
+    //Change sprites order in layer so they will display ontop of other rings and pins
     public void ChangeSpriteRenderingOrder()
     {
         if(backSprite.sortingOrder > 100)
@@ -33,6 +33,7 @@ public class Ring : MonoBehaviour
         }
     }
 
+    //check if ring can be released
     public bool TryRelease()
     {
         if (pinToEnter != null)
@@ -52,6 +53,7 @@ public class Ring : MonoBehaviour
         return false;
     }
 
+    //check if ring can be picked up
     public bool TryPickup()
     {
         if (pinToEnter != null)
@@ -71,6 +73,7 @@ public class Ring : MonoBehaviour
         return false;
     }
 
+    //ring gets picked up
     public void GetPickedUp()
     {
         ChangeSpriteRenderingOrder();
