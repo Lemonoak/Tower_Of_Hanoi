@@ -27,6 +27,18 @@ public class Pin : MonoBehaviour
         }
     }
 
+    public bool CheckRingOnTop(Ring newRing)
+    {
+        //check if ring is on top of pin
+        if (ringsOnPin.Count > 0 && newRing == ringsOnPin[ringsOnPin.Count - 1])
+        {
+            RemoveRing(newRing);
+            return true;
+        }
+        else
+            return false;
+    }
+
     public void PositionRing(Ring ringToPosition)
     {
         //Put the ring in the correct place on the pin

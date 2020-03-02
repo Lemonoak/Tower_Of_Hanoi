@@ -13,6 +13,11 @@ public class Ring : MonoBehaviour
         isBeingHeld = isHeld;
     }
 
+    public bool GetIsBeingHeld()
+    {
+        return isBeingHeld;
+    }
+
     public bool TryRelease()
     {
         if (pinToEnter != null)
@@ -21,8 +26,24 @@ public class Ring : MonoBehaviour
             return false;
     }
 
+    public bool TryPickup()
+    {
+        if (pinToEnter != null)
+        {
+            if (pinToEnter.CheckRingOnTop(this))
+            {
+                GetPickedUp();
+                return true;
+            }
+            else
+                return false;
+        }
+        return false;
+    }
+
     public void GetPickedUp()
     {
+        SetIsBeingHeld(true);
         pinToEnter.RemoveRing(this);
         pinToEnter = null;
     }
