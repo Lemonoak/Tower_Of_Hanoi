@@ -32,10 +32,12 @@ public class PickupRing : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 1, ringMask);
             if(hit.collider != null)
             {
-                if (hit.collider.GetComponent<Ring>().TryPickup())
-                    ringToHold = hit.collider.GetComponent<Ring>();
-                else
+                ringToHold = hit.collider.GetComponent<Ring>();
+                if (!ringToHold.TryPickup())
+                {
+                    //SHAKE RING
                     ringToHold = null;
+                }
             }
         }
         //hold ring
