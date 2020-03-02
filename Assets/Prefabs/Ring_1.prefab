@@ -76,6 +76,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ringSize: 1
   isBeingHeld: 0
+  backSprite: {fileID: 1482668187261709266}
+  frontSprite: {fileID: 1482668187377584145}
 --- !u!50 &4561197770609500818
 Rigidbody2D:
   serializedVersion: 4

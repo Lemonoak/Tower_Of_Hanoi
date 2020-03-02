@@ -42,7 +42,7 @@ public class PickupRing : MonoBehaviour
             }
         }
         //hold ring
-        if(Input.GetMouseButton(0) && ringToHold != null && ringToHold.GetIsBeingHeld())
+        if(Input.GetMouseButton(0) && ringToHold != null)
         {
             Vector2 oldRingPos = ringToHold.transform.position;
             ringToHold.transform.position = Vector3.Lerp(oldRingPos, new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, ringToHold.transform.position.z), ringMoveSpeed * Time.deltaTime);

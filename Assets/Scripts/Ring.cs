@@ -8,32 +8,48 @@ public class Ring : MonoBehaviour
     public int ringSize = 0;
 
     [Header("Debugging")]
-    [SerializeField] bool isBeingHeld = false;
     Pin pinToEnter;
     Animator anim;
+
+    public SpriteRenderer backSprite;
+    public SpriteRenderer frontSprite;
 
     private void Start()
     {
         anim = GetComponent<Animator>();
     }
 
-    public void SetIsBeingHeld(bool isHeld)
+    public void ChangeSpriteRenderingOrder()
     {
-        isBeingHeld = isHeld;
-    }
-
-    public bool GetIsBeingHeld()
-    {
-        return isBeingHeld;
+        if(backSprite.sortingOrder > 100)
+        {
+            backSprite.sortingOrder -= 100;
+            frontSprite.sortingOrder -= 100;
+        }
+        else
+        {
+            backSprite.sortingOrder += 100;
+            frontSprite.sortingOrder += 100;
+        }
     }
 
     public bool TryRelease()
     {
         if (pinToEnter != null)
-            return pinToEnter.CheckRingSize(this);
+        {
+            if(pinToEnter.CheckRingSize(this))
+            {
+                ChangeSpriteRenderingOrder();
+                return pinToEnter.CheckRingSize(this);
+            }
+        }
         else
+        {
             anim.SetTrigger("Shake");
             return false;
+        }
+
+        return false;
     }
 
     public bool TryPickup()
@@ -57,7 +73,7 @@ public class Ring : MonoBehaviour
 
     public void GetPickedUp()
     {
-        SetIsBeingHeld(true);
+        ChangeSpriteRenderingOrder();
         pinToEnter.RemoveRing(this);
         pinToEnter = null;
     }
