@@ -5,7 +5,6 @@ using UnityEngine;
 public class Pin : MonoBehaviour
 {
     public List<Ring> ringsOnPin;
-    Ring ringToAdd;
 
     public bool CheckRingSize(Ring newRing)
     {

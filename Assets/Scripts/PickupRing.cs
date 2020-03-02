@@ -6,7 +6,11 @@ public class PickupRing : MonoBehaviour
 {
     public static PickupRing instance;
 
-    public Ring ringToHold;
+    [Header("Properties")]
+    public float ringMoveSpeed = 1.0f;
+
+    [Header("Debugging")]
+    [SerializeField] Ring ringToHold;
     LayerMask ringMask;
 
     private void Awake()
@@ -35,7 +39,6 @@ public class PickupRing : MonoBehaviour
                 ringToHold = hit.collider.GetComponent<Ring>();
                 if (!ringToHold.TryPickup())
                 {
-                    //SHAKE RING
                     ringToHold = null;
                 }
             }
@@ -43,16 +46,14 @@ public class PickupRing : MonoBehaviour
         //hold ring
         if(Input.GetMouseButton(0) && ringToHold != null && ringToHold.GetIsBeingHeld())
         {
-            //TODO: Smooth the position from ring to mouse!
-            ringToHold.transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, ringToHold.transform.position.z);
+            Vector2 oldRingPos = ringToHold.transform.position;
+            ringToHold.transform.position = Vector3.Lerp(oldRingPos, new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, ringToHold.transform.position.z), ringMoveSpeed * Time.deltaTime);
         }
         //release ring
         if(Input.GetMouseButtonUp(0) && ringToHold != null)
         {
             if(ringToHold.TryRelease())
                 ringToHold = null;
-            //else
-                //TODO: SHAKE RING
         }
     }
 
