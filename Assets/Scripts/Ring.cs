@@ -45,9 +45,7 @@ public class Ring : MonoBehaviour
                 return pinToEnter.CheckRingSize(this);
             }
             else
-            {
                 anim.SetTrigger("Shake");
-            }
         }
 
         return false;
@@ -69,6 +67,7 @@ public class Ring : MonoBehaviour
                 return false;
             }
         }
+
         anim.SetTrigger("Shake");
         return false;
     }
