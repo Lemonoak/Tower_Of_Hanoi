@@ -34,6 +34,8 @@ public class Pin : MonoBehaviour
         //check if ring is on top of pin
         if (ringsOnPin.Count > 0 && newRing == ringsOnPin[ringsOnPin.Count - 1])
         {
+            //this makes you able to pickup a ring thats "still sliding down"
+            StopAllCoroutines();
             RemoveRing(newRing);
             return true;
         }
