@@ -8,6 +8,7 @@ public class Pin : MonoBehaviour
     public List<Ring> ringsOnPin;
     [Tooltip("Edit the prefab to edit all pins at once!")]
     public AnimationCurve slideCurve;
+    public AnimationCurve jumpCurve;
 
     public bool CheckRingSize(Ring newRing)
     {
@@ -45,7 +46,7 @@ public class Pin : MonoBehaviour
 
     void PositionRing(Ring ringToPosition)
     {
-        //Put the ring in the correct place on the pin
+        //find the correct position on the pin to put the ring at
         int stepsUp = 0;
         for (int i = 0; i < ringsOnPin.Count; i++)
         {
@@ -53,20 +54,62 @@ public class Pin : MonoBehaviour
         }
 
         //position the ring at the top of the pin to then look like its sliding down properly
-        ringToPosition.transform.position = new Vector3(gameObject.transform.position.x, -3.6f + (1.2f * 5));
+        StartCoroutine(JumpRingToTopOfPin(ringToPosition, stepsUp));
+    }
+
+    IEnumerator JumpRingToTopOfPin(Ring ringToSlide, int stepsUp)
+    {
+        float startTime = Time.time;
+        float maxTime = 1;
+        Transform slideStartPos = ringToSlide.transform;
+
+        bool isMoving = true;
+
+        while (isMoving)
+        {
+            float timeSinceStarted = Time.time - startTime;
+            float percent = timeSinceStarted / maxTime;
+            //move the ring 1 "ring" above the pin to then smoothly fall down
+            ringToSlide.transform.position = Vector3.Slerp(slideStartPos.position, new Vector3(gameObject.transform.position.x, -3.6f + (1.2f * 5), slideStartPos.position.z), jumpCurve.Evaluate(percent));
+
+            if (percent >= maxTime)
+                isMoving = false;
+
+            //fixed a problem where the ring would pause while ontop of the ring because x position was not completely 0
+            if (ringToSlide.transform.position.x <= gameObject.transform.position.x + 0.01f && percent >= maxTime / 2 ||
+                ringToSlide.transform.position.x >= gameObject.transform.position.x - 0.01f && percent >= maxTime / 2)
+            {
+                ringToSlide.transform.position = new Vector2(gameObject.transform.position.x, ringToSlide.transform.position.y);
+                isMoving = false;
+            }
+
+            yield return null;
+        }
+
+        //change to display back part of ring behind the pin
+        ringToSlide.ChangeSpriteRenderingOrder();
         //start the slide down the pin to correct position
-        StartCoroutine(SlideRingDown(ringToPosition, stepsUp));
+        StartCoroutine(SlideRingDown(ringToSlide, stepsUp));
     }
 
     IEnumerator SlideRingDown(Ring ringToSlide, int steps)
     {
-        float time = 0;
+        float startTime = Time.time;
         float maxTime = 1;
         Transform slideStartPos = ringToSlide.transform;
-        while (time < maxTime)
+
+        bool isMoving = true;
+
+        while (isMoving)
         {
-            ringToSlide.transform.position = Vector3.Lerp(slideStartPos.position, new Vector3(gameObject.transform.position.x, -3.6f + (1.2f * steps), slideStartPos.position.z), slideCurve.Evaluate(time / maxTime));
-            time += Time.deltaTime;
+            //-3.6f is the bottom of the pin (where the ring will go if the pin is empty) then it moves 1.2f up per ring on the pin
+            float timeSinceStarted = Time.time - startTime;
+            float percent = timeSinceStarted / maxTime;
+            ringToSlide.transform.position = Vector3.Lerp(slideStartPos.position, new Vector3(gameObject.transform.position.x, -3.6f + (1.2f * steps), slideStartPos.position.z), slideCurve.Evaluate(percent));
+
+            if(percent >= maxTime)
+                isMoving = false;
+
             yield return null;
         }
     }

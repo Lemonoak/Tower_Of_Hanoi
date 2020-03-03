@@ -40,7 +40,6 @@ public class Ring : MonoBehaviour
         {
             if(pinToEnter.CheckRingSize(this))
             {
-                ChangeSpriteRenderingOrder();
                 anim.SetBool("Wiggle", false);
                 return pinToEnter.CheckRingSize(this);
             }
