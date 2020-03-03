@@ -41,13 +41,13 @@ public class Ring : MonoBehaviour
             if(pinToEnter.CheckRingSize(this))
             {
                 ChangeSpriteRenderingOrder();
+                anim.SetBool("Wiggle", false);
                 return pinToEnter.CheckRingSize(this);
             }
-        }
-        else
-        {
-            anim.SetTrigger("Shake");
-            return false;
+            else
+            {
+                anim.SetTrigger("Shake");
+            }
         }
 
         return false;
@@ -79,6 +79,7 @@ public class Ring : MonoBehaviour
         ChangeSpriteRenderingOrder();
         pinToEnter.RemoveRing(this);
         pinToEnter = null;
+        anim.SetBool("Wiggle", true);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
