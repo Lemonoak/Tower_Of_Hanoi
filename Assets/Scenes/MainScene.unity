@@ -900,6 +900,56 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 957440383992529218, guid: 548b80f351a80ae4a9bcd5740d57f2dd,
+        type: 3}
+      propertyPath: slideCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 957440383992529218, guid: 548b80f351a80ae4a9bcd5740d57f2dd,
+        type: 3}
+      propertyPath: slideCurve.m_Curve.Array.data[0].inSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 957440383992529218, guid: 548b80f351a80ae4a9bcd5740d57f2dd,
+        type: 3}
+      propertyPath: slideCurve.m_Curve.Array.data[0].outSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 957440383992529218, guid: 548b80f351a80ae4a9bcd5740d57f2dd,
+        type: 3}
+      propertyPath: slideCurve.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 957440383992529218, guid: 548b80f351a80ae4a9bcd5740d57f2dd,
+        type: 3}
+      propertyPath: slideCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 957440383992529218, guid: 548b80f351a80ae4a9bcd5740d57f2dd,
+        type: 3}
+      propertyPath: slideCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 957440383992529218, guid: 548b80f351a80ae4a9bcd5740d57f2dd,
+        type: 3}
+      propertyPath: slideCurve.m_Curve.Array.data[1].inSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 957440383992529218, guid: 548b80f351a80ae4a9bcd5740d57f2dd,
+        type: 3}
+      propertyPath: slideCurve.m_Curve.Array.data[1].outSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 957440383992529218, guid: 548b80f351a80ae4a9bcd5740d57f2dd,
+        type: 3}
+      propertyPath: slideCurve.m_Curve.Array.data[1].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 957440383992529218, guid: 548b80f351a80ae4a9bcd5740d57f2dd,
+        type: 3}
+      propertyPath: slideCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 548b80f351a80ae4a9bcd5740d57f2dd, type: 3}
 --- !u!1001 &1482668187125339973

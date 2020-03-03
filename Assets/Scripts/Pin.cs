@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Pin : MonoBehaviour
 {
+    [Header("Properties")]
     public List<Ring> ringsOnPin;
+    [Tooltip("Edit the prefab to edit all pins at once!")]
+    public AnimationCurve slideCurve;
 
     public bool CheckRingSize(Ring newRing)
     {
@@ -38,7 +41,7 @@ public class Pin : MonoBehaviour
             return false;
     }
 
-    public void PositionRing(Ring ringToPosition)
+    void PositionRing(Ring ringToPosition)
     {
         //Put the ring in the correct place on the pin
         int stepsUp = 0;
@@ -47,10 +50,26 @@ public class Pin : MonoBehaviour
             stepsUp++;
         }
 
-        ringToPosition.transform.position = new Vector3(gameObject.transform.position.x, -3.6f + (1.2f * stepsUp));
+        //position the ring at the top of the pin to then look like its sliding down properly
+        ringToPosition.transform.position = new Vector3(gameObject.transform.position.x, -3.6f + (1.2f * 5));
+        //start the slide down the pin to correct position
+        StartCoroutine(SlideRingDown(ringToPosition, stepsUp));
     }
 
-    public void AddRing(Ring ringToAdd)
+    IEnumerator SlideRingDown(Ring ringToSlide, int steps)
+    {
+        float time = 0;
+        float maxTime = 1;
+        Transform slideStartPos = ringToSlide.transform;
+        while (time < maxTime)
+        {
+            ringToSlide.transform.position = Vector3.Lerp(slideStartPos.position, new Vector3(gameObject.transform.position.x, -3.6f + (1.2f * steps), slideStartPos.position.z), slideCurve.Evaluate(time / maxTime));
+            time += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    void AddRing(Ring ringToAdd)
     {
         if(!ringsOnPin.Contains(ringToAdd))
         {
