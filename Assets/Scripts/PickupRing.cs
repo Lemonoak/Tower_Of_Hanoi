@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PickupRing : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class PickupRing : MonoBehaviour
     [Header("Debugging")]
     [SerializeField] Ring ringToHold;
     LayerMask ringMask;
+    [SerializeField] TextMeshProUGUI movesText;
+    int moves = 0;
 
     private void Awake()
     {
@@ -22,6 +25,8 @@ public class PickupRing : MonoBehaviour
     {
         //make raycast only find rings
         ringMask = LayerMask.GetMask("Rings");
+        //find moves text object
+        movesText = GameObject.FindGameObjectWithTag("MoveText").GetComponent<TextMeshProUGUI>();
     }
 
     void Update()
@@ -52,8 +57,18 @@ public class PickupRing : MonoBehaviour
         if(Input.GetMouseButtonUp(0) && ringToHold != null)
         {
             if(ringToHold.TryRelease())
+            {
                 ringToHold = null;
+                AddMoveToMoveText();
+            }
         }
+    }
+
+    void AddMoveToMoveText()
+    {
+        //increase move counter by 1 and update text
+        moves++;
+        movesText.text = "Moves: " + moves.ToString();
     }
 
     //only one pickup instance should ever be in the scene (but always one)
